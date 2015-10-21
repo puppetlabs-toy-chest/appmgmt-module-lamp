@@ -1,15 +1,14 @@
 application lamp (
-  $parameter = 'default',
-){
+  $db_user,
+  $db_password,
+  $web_count = 2,
+) {
+  $webs = $web_count.map |$i| { Http["lamp-${name}-${i}"] }
 
-  site::apache { 'one':
-    export => Http['one'],
-  }
-  site::apache { 'two':
-    export => Http['two'],
-  }
-  site::apache { 'three':
-    export => Http['three'],
+  $webs.each |$i, $web| {
+    site::apache { "${name}-${i}":
+      export => $web,
+    }
   }
   ## An example of that capability resource
   # http {'three':
@@ -18,19 +17,16 @@ application lamp (
   #   port => 80,
   # }
 
-  $http_members = [
-    Http['one'],
-    Http['two'],
-    Http['three']
-  ]
-  site::lb { $name:
-    balancermembers => $http_members,
-    consume         => $http_members,
+  site::lb { "lamp-lb-${name}":
+    balancermembers => $webs,
+    port            => 80,
+    require         => $webs,
+    export          => Http["lamp-lb-${name}"],
   }
 
   site::pql { $name:
-    user     => 'ryan',
-    password => 'pass',
+    user     => $db_user,
+    password => $db_password,
     export   => Sql[$name],
   }
 
