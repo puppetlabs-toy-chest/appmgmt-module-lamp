@@ -31,7 +31,7 @@ application lamp (
   site::pql { $name:
     user     => 'ryan',
     password => 'pass',
-    export   => Sql['foo'],
+    export   => Sql[$name],
   }
 
 }
