@@ -1,0 +1,17 @@
+{
+  "name": "puppetlabs-lamp",
+  "version": "0.0.1",
+  "author": "Puppet Labs",
+  "license": "Apache-2.0",
+  "summary": "Example LAMP Stack for use with Puppet Application Orchestration",
+  "source": "https://github.com/examplecorp/examplecorp-mymodule",
+  "project_page": "https://forge.puppetlabs.com/examplecorp/mymodule",
+  "issues_url": "https://github.com/examplecorp/examplecorp-mymodule/issues",
+  "dependencies": [
+    { "name": "puppetlabs/apache", "version_requirement": ">=1.6.0 <2.0.0" },
+    { "name": "puppetlabs/stdlib", "version_requirement": ">=4.7.0 <5.0.0" },
+    { "name": "puppetlabs/concat", "version_requirement": ">=1.2.3 <2.0.0" },
+    { "name": "puppetlabs/mysql", "version_requirement": ">=3.6.1 <4.0.0" },
+    { "name": "nanliu/staging", "version_requirement": ">=1.0.3 <2.0.0" }
+  ]
+}

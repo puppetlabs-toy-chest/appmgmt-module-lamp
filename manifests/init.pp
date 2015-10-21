@@ -1,37 +1,23 @@
 application lamp (
-  $parameter = 'default',
-){
+  $db_user,
+  $db_password,
+  $docroot = '/var/www/html',
+) {
 
-  site::apache { 'one':
-    export => Http['one'],
-  }
-  site::apache { 'two':
-    export => Http['two'],
-  }
-  site::apache { 'three':
-    export => Http['three'],
-  }
-  ## An example of that capability resource
-  # http {'three':
-  #   host => "el1.vm",
-  #   ip   => "172.16.89.222",
-  #   port => 80,
-  # }
-
-  $http_members = [
-    Http['one'],
-    Http['two'],
-    Http['three']
-  ]
-  site::lb { $name:
-    balancermembers => $http_members,
-    consume         => $http_members,
+  lamp::web { $name:
+    docroot => $docroot,
+    export  => Http["lamp-${name}"],
   }
 
-  site::pql { $name:
-    user     => 'ryan',
-    password => 'pass',
-    export   => Sql['foo'],
+  lamp::app { $name:
+    docroot => $docroot,
+    consume => Sql["lamp-${name}"],
+  }
+
+  lamp::db { $name:
+    db_user     => $db_user,
+    db_password => $db_password,
+    export      => Sql["lamp-${name}"],
   }
 
 }
