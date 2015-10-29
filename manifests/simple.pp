@@ -4,7 +4,7 @@ application lamp::simple (
 ) {
 
   site::apache { 'lamp_apache':
-    consume => Sql['lamp_mysql']
+    consume => Sql['lamp_mysql'],
     export  => Http['lamp_apache'],
   }
 
