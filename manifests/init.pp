@@ -10,7 +10,7 @@ application lamp (
       export => $web,
     }
   }
-  ## An example of that capability resource
+  ## An example of that http service resource
   # http {'three':
   #   host => "el1.vm",
   #   ip   => "172.16.89.222",
