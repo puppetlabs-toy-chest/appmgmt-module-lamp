@@ -9,8 +9,8 @@ application lamp::simple (
   }
 
   site::mysql { 'lamp_mysql':
-    user     => $db_user,
-    password => $db_password,
+    db_user     => $db_user,
+    db_password => $db_password,
     export   => Sql['lamp_mysql'],
   }
 
