@@ -14,10 +14,10 @@ application lamp (
     consume => Sql["lamp-${name}"],
   }
 
-  lamp::db { $name:
-    db_user     => $db_user,
-    db_password => $db_password,
-    export      => Sql["lamp-${name}"],
+  profile::db { $name:
+    user     => $db_user,
+    password => $db_password,
+    export   => Sql["lamp-${name}"],
   }
 
 }
