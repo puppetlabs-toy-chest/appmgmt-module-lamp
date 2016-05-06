@@ -22,6 +22,7 @@ It's recommended that you start by reading [documentation](https://docs.puppetla
 
 Here's a simple application instance declaration (for your site manifest) that places the database on a separate node from the web server and application.
 
+```
 lamp { 'stack':
   db_user     => 'stack',
   db_password => 'exchange',
@@ -30,9 +31,11 @@ lamp { 'stack':
     Node['node.two.domain'] => Lamp::Db['stack'],
   }
  }
+```
 
  For situations like development, it can be useful to assign all application components to a single node, like the following.
 
+```
  lamp { 'stack':
    db_user     => 'stack',
    db_password => 'exchange',
@@ -44,6 +47,7 @@ lamp { 'stack':
      ],
    }
   }
+```
 
 In both cases, the [puppet orchestrator](https://docs.puppetlabs.com/pe/latest/orchestrator_intro.html) can be used to configure the nodes participating in the LAMP application.
 
